@@ -1,9 +1,19 @@
 FROM node:16.18
 
-ENV PORT=3000
-
-COPY . /frontend-react-js
+# Set the working directory
 WORKDIR /frontend-react-js
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install npm dependencies
 RUN npm install
-EXPOSE ${PORT}
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Command to start the application
 CMD ["npm", "start"]
